@@ -1,0 +1,193 @@
+Primeiro projeto com React Native
+
+#Ambiente de desenvolvimento
+https://react-native.rocketseat.dev/
+Tutorial para configurar o ambiente para usar React Native
+
+#Seguir esses passos
+https://react-native.rocketseat.dev/android/windows
+
+#Acessar PowerShell
+Fazer as execuções abaixo
+
+#Get-ExecutionPolicy
+Caso o retorno desse comando seja diferente de “Restricted”, pule para o próximo passo. Porém, se o retorno for “Restricted”, execute o seguinte comando em seu terminal:
+
+#Set-ExecutionPolicy AllSigned
+Agora, execute o seguinte comando para instalar o Chocolatey:
+
+#Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+#Se você já tiver o Node.js instalado em sua máquina, certifique-se que sua versão é superior à 7 e caso esteja com o JDK instalado em sua máquina, certifique-se que sua versão seja a 8.
+choco install -y nodejs-lts yarn python2 jdk8
+
+#Agora reinicie o Powershell e execute, um de cada vez, os seguintes comandos para verificar se instalou corretamente:
+node -v
+npm -v
+yarn -v
+python --version
+java -version
+
+#Versão Java instalado
+java version "1.8.0_211" 
+Anote apenas o valor da versão, que está entre aspas, apresentado na primeira linha (ex.: 1.8.0_151). Você vai precisar desse valor mais pra frente.
+
+#Crie uma pasta para o Android
+c:\Android\Sdk
+
+#Variáveis de ambiente do ANDROID e JAVA
+Agora, no Painel de Controle do Windows, abra o item “Sistema e Segurança” ou “Sistema”, clique em “Configurações avançadas do sistema”, selecione “Variáveis de ambiente” e clique no botão “Nova variável de ambiente”, indique o nome da variável como ANDROID_HOME, adicione o caminho utilizado acima (Ex.: C:\Android\Sdk) como segundo parâmetro e clique em OK. Faça o mesmo processo para criar a variável JAVA_HOME com o caminho da pasta instalada C:\Program Files\Java\jdk[VERSÃO_ANOTADA_POR_VOCÊ].
+
+#Variáveis de ambiente em PATH
+Na mesma janela de "Variáveis de ambiente" no Windows, clique na variável PATH e então em "Editar". Haverá uma lista de caminhos e você deve adicionar esses quatro novos caminhos no fim da lista:
+%ANDROID_HOME%\emulator
+%ANDROID_HOME%\tools
+%ANDROID_HOME%\tools\bin
+%ANDROID_HOME%\platform-tools
+
+#Baixando Android Studio
+Acesse a página do Android Studio e clique no botão Download Android Studio.
+https://developer.android.com/studio/
+
+#Instale o Android Studio
+A primeira janela que deve aparecer é para escolher o que vai ser instalado. Por padrão, a opção Android Studio já vem selecionada. Selecione também a opção Android Virtual Device e clique em Next.
+
+#Configurando Android Studio
+A primeira janela a ser apresentada deve ser perguntando sobre a importação de configurações de outro Android Studio. Selecione a opção Do not import settings e clique em OK.
+Após o carregamento terminar, deve aparecer uma página de Welcome. Clique em Next.
+Na sequência, será pedido o tipo de instalação. Escolha a opção Custom e clique em Next.
+Nesse momento, será pedido para escolher a localização do pacote JDK instalado. 
+Escolha a opção JAVA_HOME. Verifique se ela está apontando para a JDK 8. Clique em Next
+
+A SDK é o pacote que vai possibilitar que sua aplicação React Native faça o build. Por padrão, ele instala a última SDK estável (nesse caso a 29);
+O Intel HAXM é para melhorar a performance da emulação;
+O Android Virtual Device vai criar um emulador padrão pronto para execução.
+Um fator essencial nessa etapa é o caminho de instalação da SDK. Utilize a pasta que você criou na seção Preparativos para o Android Studio (Ex.: C:\Android\Sdk). Não utilize espaços ou caracteres especiais pois causará erros mais para frente e o próprio Android Studio alerta se o seu caminho não está bom.
+
+Atualmente, o React Native utiliza a SDK 28 como padrão para projetos Android. 
+Abra o Android Studio. No canto inferior direito da janela, clique em Configure e escolha a opção SDK Manager.
+Em seguida, na aba SDK Platforms selecione o Android 9.0 (Pie), que corresponde à API (SDK) 28, e clique em Apply.
+Por fim, será realizada a instalação. Ao fim do processo, clique em Finish e repare que a agora a API 29 (instalada por padrão) e 28 estão com status Installed.
+
+#Configurando o Emulador Android - AVD Manager
+Abra o Android Studio como admin. No canto inferior direito da janela, clique em Configure e escolha a opção AVD Manager.
+Na sequência, será apresentada uma tela com os emuladores instalados. Se você marcou a opção Android Virtual Device na etapa de configuração do Android Studio, deve aparecer um emulador já configurado e pronto para uso. Caso queira utilizar esse mesmo, pule para a próxima seção. Porém, caso queira criar seu próprio emulador, selecione a opção Create Virtual Device no canto inferior esquerdo.	
+Nessa etapa, será perguntado qual Hardware você quer selecionar. Como exemplo, escolhi na aba Phone o Pixel 3a (perceba que ele e apenas alguns outros tem acesso a Play Store, caso esse seja um fator importante na sua decisão). Após escolher, clique em Next.
+Em seguida, você deverá escolher a imagem do sistema (API) do emulador a partir de uma das três listas: Recommended, x86 Images e Other Images. Se essa é sua primeira vez, provavelmente nenhuma imagem estará baixada. Clique no link de Download na frente do nome da imagem, aceite as licenças e aguarde a instalação. Como exemplo, escolhi da lista Recommended a opção Pie (API 28) que é compatível com o Google Play.
+
+#Configurando para usar o celular físico como emulador
+1) Habilitar o modo desenvolvedor no celular físico - clicando 7x em cima do 'Número da Versão'
+2) 'Menu Sistema' e procurar pela opção Opções de 'Desenvolvedor' e ativar 'Depuração USB'
+3) Visualizar dispositivos com o comando 'adb devices' no CMD
+C:\Users\vinic>adb devices
+List of devices attached
+0055119550      device
+
+4) Caso esteja assim 'unauthorized':
+List of devices attached
+4df798d76f98cf6d unauthorized
+Revoke USB Debugging on phone
+Restart ADB Server:
+adb kill-server
+adb start-server
+Deve resolver!
+
+#Configurando o React Native de forma global
+yarn add react-native-cli
+react-native init instarocket - ao executar esse pode ocasionar o seguinte erro 'The term 'react-native' is not recognized as the name of a cmdlet', diante disso rode o seguinte comando 'npm install -g react-native-cli'
+
+#Configurando o React Native de forma a usar o npx
+npx react-native init modulo06
+
+#Processo de instalação no emulador/celular físico - acesse a pasta criada no passo anterior
+npx react-native run-android
+Serão abertas duas telas, uma com a execução do processo e outra com o símbolo do React em CMD
+Deve aparecer uma pergunta no celular 'Welcome to React'
+
+#Para iniciar o React-native
+react-native start
+
+#Generate .editorConfig
+end_of_line = ls
+e as duas últimas para true
+
+#Instalando EsLint
+Se tiver algum arquivo do eslint, remova-o
+yarn add eslint -D
+yarn eslint -init
+
+#Remova o arquivo package-lock.json
+Como foi instalado pelo npm não precisamos dele
+
+#Para fazer todas as instalações
+yarn
+
+#Instalação do Prettier
+yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
+
+#Reactotron - Para debugar - console.log - https://github.com/infinitered/reactotron
+https://github.com/infinitered/reactotron/blob/master/docs/quick-start-react-native.md
+https://github.com/infinitered/reactotron/releases
+Instale a última versão estável
+
+#Instalando o reactotron
+yarn add reactotron-react-native
+
+#Caso não conecte o celular no Reactotron adicione o ip e porta no 'ReactotronConfig.js'
+const tron = Reactotron.configure({host: '192.168.0.7', port: 9090}).useReactNative().connect();
+use 'netstat' no CMD para evidenciar as conexões
+
+#Logs do reactotron
+console.tron.log('Log padrão');
+console.tron.warn('Log de warning');
+console.tron.error('Log de erro');
+Cso não tiver aparecendo no 'Reactotron' deve-se checar o número ip local
+
+#Instalando react-navigation
+yarn add @react-navigation/native
+
+#Instalando outras dependências do 'react-navigation'
+https://reactnavigation.org/docs/getting-started
+Installing dependencies into a bare React Native project
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+#Instalando os tipos de navegações - aqui usaremos a stack
+yarn add react-navigation-stack @react-native-community/masked-view react-native-safe-area-context
+yarn add @react-navigation/stack
+
+#Instalando o Styled-components para estilizar
+yarn add styled-components
+
+#Instalando a extensão de ícones
+yarn add react-native-vector-icons
+https://github.com/oblador/react-native-vector-icons#android
+
+#Adicione o seguinte código no arquivo
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
+]
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+#Restartando a fonte novamente
+Após isso deve rodar o android para recarregar isso novamente
+npx react-native run-android
+
+#Instalando o 'axios' para fazer chamadas api
+yarn add axios
+
+#Alterando em massa
+Selecione o caractere e pressione CTRL+D para quantos quiser que seja propagado e comece a digitar
+
+
+
+
+C:\Temp\Bootcamp2019\bootcamp_modulo06
+
+#Passos para rodar
+Verificar quais dispositivos estão ativos: adb devices
+Inicializar : npx react-native run-android
+
+
+
+
+
