@@ -73,6 +73,7 @@ export default class Main extends Component {
                 <ProfileButtonText>Ver perfil</ProfileButtonText>
               </ProfileButton>
             </User>
+            <test></test>
           )}
         />
       </Container>
