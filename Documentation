@@ -178,6 +178,12 @@ yarn add axios
 #Alterando em massa
 Selecione o caractere e pressione CTRL+D para quantos quiser que seja propagado e comece a digitar
 
+#Armazenando informações dentro do celular
+yarn add @react-native-community/async-storage
+Após a instalação, deve rodar movamente o 'run-andoid' para que a extensão seja carregada
+
+
+
 
 
 
