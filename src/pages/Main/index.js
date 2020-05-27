@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 
@@ -21,10 +21,14 @@ export default class Main extends Component {
   state = {
     newUser: '',
     users: [],
+    loading: false,
   };
 
   handleAddUser = async () => {
     const { users, newUser } = this.state;
+
+    this.setState({ loading: true });
+
     const response = await api.get(`/users/${newUser}`);
     const data = {
       name: response.data.name,
@@ -35,6 +39,7 @@ export default class Main extends Component {
     this.setState({
       users: [...users, data],
       newUser: '',
+      loading: false,
     });
 
     // Para quando finalizar o teclado sumir
@@ -42,7 +47,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { users, newUser } = this.state;
+    const { users, newUser, loading } = this.state;
 
     return (
       <Container>
@@ -57,7 +62,11 @@ export default class Main extends Component {
             onSubmitEditing={this.handleAddUser}
           />
           <SubmitButton onPress={this.handleAddUser}>
-            <Icon name="add" size={20} color="#FFF" />
+            {loading ? (
+              <ActivityIndicator color="FFF" />
+            ) : (
+              <Icon name="add" size={20} color="#FFF" />
+            )}
           </SubmitButton>
         </Form>
         <List
@@ -69,7 +78,7 @@ export default class Main extends Component {
               <Name>{item.name}</Name>
               <Bio>{item.bio}</Bio>
 
-              <ProfileButton onPress={() => {}}>
+              <ProfileButton loading={loading} onPress={() => {}}>
                 <ProfileButtonText>Ver perfil</ProfileButtonText>
               </ProfileButton>
             </User>
