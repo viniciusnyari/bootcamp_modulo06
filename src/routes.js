@@ -14,7 +14,6 @@ function Routes() {
         <Stack.Screen
           name="Main"
           options={{
-            title: 'Usuários',
             headerTitleStyle: {
               alignSelf: 'center',
             },
@@ -22,16 +21,21 @@ function Routes() {
               backgroundColor: '#7159c1',
             },
             headerTintColor: '#fff',
+            title: 'Usuários',
           }}
           component={Main}
         />
         <Stack.Screen
           name="User"
           options={{
-            title: 'Bla',
             headerTitleStyle: {
               alignSelf: 'center',
             },
+            headerStyle: {
+              backgroundColor: '#7159c1',
+            },
+            headerTintColor: '#fff',
+            title: 'Perfil',
           }}
           component={User}
         />

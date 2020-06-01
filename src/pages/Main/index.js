@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -19,6 +20,16 @@ import {
 } from './styles';
 
 export default class Main extends Component {
+  static navigationOptions = {
+    title: 'Usuários2',
+  };
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
+  };
+
   state = {
     newUser: '',
     users: [],
@@ -35,7 +46,7 @@ export default class Main extends Component {
   componentDidUpdate(_, prevState) {
     const { users } = this.state;
 
-    if (prevState.users != users) {
+    if (prevState.users !== users) {
       AsyncStorage.setItem('users', JSON.stringify(users));
     }
   }

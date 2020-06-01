@@ -182,10 +182,11 @@ Selecione o caractere e pressione CTRL+D para quantos quiser que seja propagado 
 yarn add @react-native-community/async-storage
 Após a instalação, deve rodar movamente o 'run-andoid' para que a extensão seja carregada
 
+#Adicionando o 'prop-types'
+yarn add prop-types
 
 
-parei Realizando navegação em 3:21
-
+Parei aqui 'Buscando dados da API' 3:36
 
 
 C:\Temp\Bootcamp2019\bootcamp_modulo06
