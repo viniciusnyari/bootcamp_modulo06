@@ -185,15 +185,14 @@ Após a instalação, deve rodar movamente o 'run-andoid' para que a extensão s
 #Adicionando o 'prop-types'
 yarn add prop-types
 
-
-Parei aqui 'Listando favoritos' 3:20
-
-
+#Projeto está alocado no seguinte local
 C:\Temp\Bootcamp2019\bootcamp_modulo06
 
-#Passos para rodar
-Verificar quais dispositivos estão ativos: adb devices
-Inicializar : npx react-native run-android
+#Passos para rodar - verificar dispositivos estão ativos
+adb devices
+
+#Inicializar andoid no celular conectaco a usb
+npx react-native run-android
 
 
 
